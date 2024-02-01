@@ -1,5 +1,5 @@
 const LOAD_COMMENTS = 'comments/loadComments'
-const CREATE_COMMENT = 'comments/createComment'
+// const CREATE_COMMENT = 'comments/createComment'
 
 const loadComments = comments => {
     return {
@@ -8,12 +8,12 @@ const loadComments = comments => {
     }
 }
 
-const createComment = comment => {
-    return {
-        type: CREATE_COMMENT,
-        comment
-    }
-}
+// const createComment = comment => {
+//     return {
+//         type: CREATE_COMMENT,
+//         comment
+//     }
+// }
 
 export const loadCommentsThunk = () => async(dispatch) => {
     const res = await fetch('/api/comments')
