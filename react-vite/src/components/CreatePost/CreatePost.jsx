@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../redux/post';
 // import { loadPostsThunk } from '../../redux/post';
 // import { useNavigate } from 'react-router-dom';
@@ -16,7 +16,7 @@ export default function CreatePost() {
     // const user = useSelector(state => state.session.user)
     const [image, setImage] = useState(null)
     const [imageLoading, setImageLoading] = useState(false)
-
+    console.log(errors, submitted)
     
     const handleSubmit = async (e) => {
         e.preventDefault();
