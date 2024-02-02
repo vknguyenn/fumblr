@@ -40,7 +40,7 @@ export default function CreatePost() {
             newErrors.title = 'Title is required'
         } 
         if (!text.length) {
-            newErrors.title = 'Text is required'
+            newErrors.text = 'Text is required'
         } 
             
         setErrors(newErrors)
