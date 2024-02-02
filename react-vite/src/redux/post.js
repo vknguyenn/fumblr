@@ -1,5 +1,7 @@
 const LOAD_POSTS = 'posts/loadPosts'
+const LOAD_ONE_POST = 'post/loadOnePost'
 const CREATE_POST = 'posts/createPost'
+const UPDATE_POST = 'post/updatePost'
 const DELETE_POST = 'posts/deletePost'
 
 const loadPosts = posts => {
@@ -9,9 +11,22 @@ const loadPosts = posts => {
     }
 }
 
+const loadOnePost = post => {
+    return {
+        type: LOAD_ONE_POST,
+        post
+    }
+}
+
 const createPost = post => {
     return {
         type: CREATE_POST,
+        post
+    }
+}
+const updatePost = post => {
+    return {
+        type: UPDATE_POST,
         post
     }
 }
@@ -32,6 +47,16 @@ export const loadPostsThunk = () => async(dispatch) => {
     }
 }
 
+export const loadOnePostThunk = (postId) => async(dispatch) => {
+    const res = await fetch(`/api/posts/${postId}`)
+    
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(loadOnePost(data));
+        return data
+    }
+}
+
 export const createPostThunk = (post) => async(dispatch) => {
     const res = await fetch('/api/posts', {
         method: "POST",
@@ -43,6 +68,20 @@ export const createPostThunk = (post) => async(dispatch) => {
         dispatch(createPost(data))
         return data
     }
+}
+
+export const updatePostThunk = (post, postId) => async(dispatch) => {
+    const res = await fetch(`/api/posts/${postId}`, {
+        method: 'PUT',
+        body: post
+    })
+
+    if (res.ok) {
+        const editedPost = await res.json()
+        dispatch(updatePost(editedPost));
+        return editedPost
+    }
+
 }
 
 export const deletePostThunk = (postId) => async(dispatch) => {
@@ -57,23 +96,34 @@ export const deletePostThunk = (postId) => async(dispatch) => {
 const initialState = {}
 
 const postReducer = (state = initialState, action) => {
-    const newState = { ...state };
     switch (action.type) {
-        case LOAD_POSTS:
-            action.posts.posts.forEach(post => 
+        case LOAD_POSTS: {
+            const newState = { ...state }
+            action.posts.posts.forEach(post => {
                 newState[post.id] = post
-            )
+            })
             return newState;
-        case CREATE_POST:
-            newState[action.post.id] = action.post;
-            return newState
+        }
+        case LOAD_ONE_POST: {
+            const newState = { ...state };
+            newState[action.post.id] = action.post
+            return newState;
+        }
+        case CREATE_POST: {
+            const newState = { ...state, [action.post.id]: action.post }
+            return newState;
+        }
+        case UPDATE_POST: {
+            const newState = { ...state, [action.post.id]: action.post }
+            return newState;
+        }
         case DELETE_POST: {
             const newState = { ...state }
             delete newState[action.postId]
             return newState
         }
     default:
-        return newState;
+        return state;
     }
 }
 
