@@ -124,8 +124,8 @@ def delete_post(id):
         return {"message": "Unauthorized to delete this post"}, 403
     
 
-    if post.image:
-        remove_img_from_s3(post.image)
+    if post.image_url:
+        remove_img_from_s3(post.image_url)
 
     db.session.delete(post)
     db.session.commit()
