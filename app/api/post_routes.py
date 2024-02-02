@@ -26,22 +26,21 @@ def all_posts():
 @post_routes.route('', methods=['POST'])
 @login_required
 def new_form():
-    form = PostForm()
+    form = PostForm(request.form)
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        data = form.data
-        image_url = data['image']
+        image = request.files.get('image')
 
         upload_img_url = None   
-        if image_url:
-            image_url.filename = get_unique_filename_img(image_url.filename)
-            upload_img = upload_img_to_s3(image_url)
+        if image:
+            image.filename = get_unique_filename_img(image.filename)
+            upload_img = upload_img_to_s3(image)
 
             if 'url' in upload_img:
                 upload_img_url = upload_img['url']
             else:
-                return validation_error_messages(upload_img), 400
+                return {'errors': validation_error_messages(upload_img)}, 400
 
             
             
