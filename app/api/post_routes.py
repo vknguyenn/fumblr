@@ -23,24 +23,41 @@ def all_posts():
 
     return {'posts': [post.to_dict() for post in posts]}
 
+@post_routes.route('/manage', methods=['GET'])
+@login_required
+def manage_posts():
+    user_posts = Post.query.filter_by(user_id=current_user.id).all()
+    return {'user_posts': [post.to_dict() for post in user_posts]}
+
+
+@post_routes.route('/<int:id>', methods=['GET'])
+@login_required
+def one_post(id):
+    post = Post.query.get(id)
+    if not post:
+        return {"message": "Post not found"}, 404
+    return {'post': [post.to_dict()]}
+
+
 @post_routes.route('', methods=['POST'])
 @login_required
 def new_form():
-    form = PostForm(request.form)
+    form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        image = request.files.get('image')
+        data = form.data
+        image_url = data['image']
 
         upload_img_url = None   
-        if image:
-            image.filename = get_unique_filename_img(image.filename)
-            upload_img = upload_img_to_s3(image)
+        if image_url:
+            image_url.filename = get_unique_filename_img(image_url.filename)
+            upload_img = upload_img_to_s3(image_url)
 
             if 'url' in upload_img:
                 upload_img_url = upload_img['url']
             else:
-                return {'errors': validation_error_messages(upload_img)}, 400
+                return validation_error_messages(upload_img), 400
 
             
             
@@ -57,24 +74,59 @@ def new_form():
 
     return {'errors': validation_error_messages(form.errors)}, 400
     
-# @post_routes.route('/<int:id>', methods=['PUT'])
-# @login_required
-# def edit_post(id):
-#     form = PostForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
+@post_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def update_post(id):
+    post = Post.query.get(id)
+    if post is None:
+        return {"message": "Post not found"}, 404
 
-#     if form.validate_on_submit():
-#         edited_post = Post.query.get(id)
-#         edited_post.post_title=form.data['post_title']
-#         edited_post.image_url=form.data['image_url']
-#         edited_post.text=form.data['text']
-#         db.session.commit()
-#         return redirect('/')
+    if post.user_id != current_user.id:
+        return {"message": "Unauthorized to edit this post"}, 403
+
+    form = PostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        data = form.data
+        image_url = data.get('image') 
+
+        upload_img_url = post.image_url
+        if image_url:
+            image_url.filename = get_unique_filename_img(image_url.filename)
+            upload_img = upload_img_to_s3(image_url)
+
+            if 'url' in upload_img:
+                upload_img_url = upload_img['url']
+            else:
+
+                return validation_error_messages(upload_img), 400
+
+        post.post_title = form.data['post_title']
+        post.text = form.data['text']
+        post.image_url = upload_img_url
+
+        db.session.commit()
+
+        return post.to_dict()
+
+    return {'errors': validation_error_messages(form.errors)}, 400
 
 @post_routes.route('<int:id>', methods=['DELETE'])
 @login_required
 def delete_post(id):
     post = Post.query.get(id)
+
+    if post is None:
+        return {"message": "Post not found"}, 404
+    
+    if post.user_id != current_user.id:
+        return {"message": "Unauthorized to delete this post"}, 403
+    
+
+    if post.image:
+        remove_img_from_s3(post.image)
+
     db.session.delete(post)
     db.session.commit()
     return {'message': 'sucessfully deleted'}
