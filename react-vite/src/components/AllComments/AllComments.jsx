@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { loadCommentsThunk } from "../redux/comment"
+import { loadCommentsThunk } from "../../redux/comment"
 
 const AllComments = () => {
     const dispatch = useDispatch()
