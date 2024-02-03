@@ -12,7 +12,7 @@ import DeletePost from '../PostModals/DeletePost'
 const HomePage = () => {
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.post)
-    const postObj = Object.values(posts);
+    const postObj = Object.values(posts).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     const user = useSelector(state => state.user);
     const currentUser = useSelector(state => state.session.user);
     
@@ -27,9 +27,11 @@ const HomePage = () => {
 
     return (
         <>
+        {currentUser && (
         <div className='create-button'>
             <OpenModalButton buttonText="Create a Post" modalComponent={ <CreatePost /> } />
         </div>
+        )}
         <div>
          {postObj.map((post) => {
                 const postUser = user[post.user_id]; 
