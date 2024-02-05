@@ -1,28 +1,26 @@
 import { useModal } from "../../context/Modal";
-import { deletePostThunk, loadPostsThunk } from "../../redux/post";
-import { clearComments } from "../../redux/comment";
+import { deleteCommentThunk, loadCommentsThunk } from "../../redux/comment";
 import { useDispatch } from "react-redux";
 
-
-const DeletePost = ({post}) => {
+const DeleteComment = ({commentId}) => {
     const dispatch = useDispatch()
     const {closeModal} = useModal()
 
-    const handleDelete = async (e) => {
+    const handleDelete = async(e) => {
         e.preventDefault()
-        await dispatch(deletePostThunk(post.id))
-        await dispatch(loadPostsThunk())
-        dispatch(clearComments(post.id))
+        console.log("COMMENT ID: ", commentId)
+        await dispatch(deleteCommentThunk(commentId))
+        await dispatch(loadCommentsThunk())
         closeModal()
+
     }
     return (
         <div className="delete-post-modal">
-            <p>Do you want to delete this post?</p>
+            <p>Do you want to delete this comment?</p>
             <button onClick={handleDelete}>Yes, delete</button>
             <button onClick={closeModal}>No</button>
         </div>
     )
-
 }
 
-export default DeletePost
+export default DeleteComment

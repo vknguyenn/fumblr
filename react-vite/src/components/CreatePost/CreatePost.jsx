@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../redux/post';
-// import { loadPostsThunk } from '../../redux/post';
-// import { useNavigate } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 
 export default function CreatePost() {
@@ -12,8 +10,7 @@ export default function CreatePost() {
     const [errors, setErrors] = useState({})
     const [submitted, setSubmitted] = useState(false)
     const { closeModal } = useModal()
- 
-    // const user = useSelector(state => state.session.user)
+
     const [image, setImage] = useState(null)
     const [imageLoading, setImageLoading] = useState(false)
     console.log(errors, submitted)
@@ -45,7 +42,7 @@ export default function CreatePost() {
             
         setErrors(newErrors)
     }, [title, text]);
-    // encType='multipart/form-data'
+ 
     return (
         <form id='post-modal' encType='multipart/form-data' onSubmit={handleSubmit}>
             <div className='modal-container'>
