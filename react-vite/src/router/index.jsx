@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import HomePage from '../components/HomePage/HomePage';
-import AllComments from '../components/AllComments/AllComments';
+// import AllComments from '../components/AllComments/AllComments';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -21,10 +21,10 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormPage />,
       },
-      {
-        path: "comment",
-        element: <AllComments />,
-      },
+      // {
+      //   path: "comment",
+      //   element: <AllComments />,
+      // },
     ],
   },
 ]);
