@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../redux/post';
-// import { loadPostsThunk } from '../../redux/post';
-// import { useNavigate } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 
 export default function CreatePost() {

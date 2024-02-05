@@ -16,27 +16,59 @@ def validation_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
-@comment_routes.route('')
-def all_posts():
-    comments = Comment.query.all()
 
-    return {'comment': [comment.to_dict() for comment in comments]}
 
-@comment_routes.route('/new', methods=["POST"])
+@comment_routes.route('/manage')
 @login_required
-def post_comment():
+def manage_comments():
+    user_comments = Comment.query.filter_by(user_id=current_user.id).all()
+    return {'user_comments': [comment.to_dict() for comment in user_comments]}
+
+
+@comment_routes.route('/<int:id>')
+@login_required
+def post_comments(id):
+    comments = Comment.query.filter_by(post_id=id).all()
+    return {'comments': [comment.to_dict() for comment in comments]}
+
+
+    
+@comment_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def update_comment(id):
+    edit_comment = Comment.query.get(id)
+
+    if edit_comment is None:
+        return {"message": "Comment not found"}, 404
+
+    if edit_comment.user_id != current_user.id:
+        return {"message": "Unauthorized to edit this comment"}, 403
+    
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         data = form.data
+        edit_comment.comment = data['comment']
 
-        created_comment = Comment(
-            comment = data["comment"],
-            userId=current_user.id, 
-        )
-
-        db.session.add(created_comment)
         db.session.commit()
 
-        return {'created_comment': created_comment.to_dict()}
+        return edit_comment.to_dict()
+    
+    return {'errors': validation_error_messages(form.errors)}, 400
+
+@comment_routes.route('<int:id>', methods=['DELETE'])
+@login_required
+def delete_comment(id):
+    remove_comment = Comment.query.get(id)
+
+    if remove_comment is None:
+        return {"message": "Comment not found"}, 404
+
+    if remove_comment.user_id != current_user.id:
+        return {"message": "Unauthorized to edit this comment"}, 403
+    
+    db.session.delete(remove_comment)
+    db.session.commit()
+    return {"message": "successfully deleted"}
+
