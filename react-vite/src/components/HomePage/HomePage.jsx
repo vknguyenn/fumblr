@@ -8,6 +8,8 @@ import CreatePost from '../CreatePost/CreatePost'
 import UpdatePost from '../PostModals/UpdatePost'
 import DeletePost from '../PostModals/DeletePost'
 import AddComment from '../Comments/AddComments'
+import UpdateComment from '../Comments/UpdateComment'
+import DeleteComment from '../Comments/DeleteComment'
 
 
 
@@ -55,7 +57,19 @@ const HomePage = () => {
                 <div className="comments-section">
                 {postComments.map(com => (
                     <div key={com.id}>
-                        <p><strong>{com.username}:</strong> {com.comment}</p>                      
+                        <p><strong>{com.username}:</strong> {com.comment}</p>
+                        {currentUser && currentUser.id === com.userId && (
+                            <>
+                                        <OpenModalButton
+                                            buttonText="Edit Comment"
+                                            modalComponent={<UpdateComment comment={com} />}
+                                            />
+                                        <OpenModalButton
+                                            buttonText="Delete Comment"
+                                            modalComponent={<DeleteComment commentId={com.id} />}
+                                            />
+                                            </>
+                                    )}                      
                     </div>
                 ))}
                 {currentUser && (

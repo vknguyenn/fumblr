@@ -2,6 +2,7 @@ const LOAD_COMMENTS = 'comments/loadComments'
 const CREATE_COMMENT = 'comments/createComment'
 const UPDATE_COMMENT = 'comments/updateComment'
 const DELETE_COMMENT = 'comments/deleteComment'
+const CLEAR_COMMENTS = 'comments/clearComments';
 
 const loadComments = comments => {
     return {
@@ -31,6 +32,12 @@ const deleteComment = commentId => {
     }
 }
 
+export const clearComments = () => {
+    return {
+        type: CLEAR_COMMENTS,
+    };
+};
+
 export const loadCommentsThunk = () => async(dispatch) => {
     const res = await fetch('/api/posts')
     
@@ -59,7 +66,7 @@ export const updateCommentThunk = (comment, commentId) => async(dispatch) => {
     const res = await fetch(`/api/comments/${commentId}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
-        body: comment
+        body: JSON.stringify(comment)
     })
 
     if (res.ok) {
@@ -86,11 +93,7 @@ const commentReducer = (state = initialState, action) => {
         case LOAD_COMMENTS:
             return {...action.comments}
         case CREATE_COMMENT:  
-        const newState = {
-            ...state,
-            [action.comment.id]: action.comment
-        };
-        return newState;
+            return { ...state, [action.comment.id]: action.comment }
         case UPDATE_COMMENT: {
             return { ...state, [action.comment.id]: action.comment }
         }
@@ -99,6 +102,8 @@ const commentReducer = (state = initialState, action) => {
             delete newState[action.commentId];
             return newState;
         }
+        case CLEAR_COMMENTS:
+            return {};
         default:
             return state;
     }
