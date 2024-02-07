@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux"
 import { useState } from "react"
 import { createCommentThunk, loadCommentsThunk } from "../../redux/comment"
 import { useModal } from "../../context/Modal"
+import './AddComment.css'
 
 
 const AddComment = ({ postId }) => {
@@ -26,18 +27,19 @@ const AddComment = ({ postId }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className='modal-container'>
+            <div className='modal-comment'>
                 <h2>Add a Comment</h2>
-                {errors.comment && <p className="error-text">{errors.comment}</p>}
+                {errors.comment && <p className="form-errors" style={{color: '#6F52FF'}}>{errors.comment}</p>}
                 <div className='comment-form-group'>
                     <textarea
+                        className="comment-box"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         placeholder="Write your comment here..."
                     />
                 </div>
                 <div className='comment-submit'>
-                    <button type='submit'>Add Comment</button>
+                    <button className='add-comment-submit' type='submit'>Add Comment</button>
                 </div>
             </div>
         </form>

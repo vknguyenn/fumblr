@@ -1,0 +1,45 @@
+.modal-container {
+    color: #8971ff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 270px;
+    width: 300px;
+    justify-content: space-evenly;
+    padding: 50px 70px;
+    border-radius: 10px;
+}
+.post-form-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.post-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 400px;
+    gap: 25px;
+}
+
+.post-form-labels {
+    margin-bottom: 4px;
+    margin-right: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #6F52FF;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.post-button:hover {
+    box-shadow: 0 0 5px #6F52FF;
+}

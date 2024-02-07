@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../redux/post';
 import { useModal } from '../../context/Modal';
+import './CreatePost.css'
 
 export default function CreatePost() {
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export default function CreatePost() {
 
     const [image, setImage] = useState(null)
     const [imageLoading, setImageLoading] = useState(false)
-    console.log(errors, submitted)
+    // console.log(errors, submitted)
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,18 +47,22 @@ export default function CreatePost() {
     return (
         <form id='post-modal' encType='multipart/form-data' onSubmit={handleSubmit}>
             <div className='modal-container'>
-                <h2>Create a Post</h2>
-                <div className='post-form-labels'>
-                    <label>Title</label>
-                    <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
+                <h2 className='create-post-title'>Create a Post</h2>
+                <div className='post-inputs'>
+                <div className='post-form-inputs'>
+                    <label className='post-form-labels'>Title:</label>
+                    <input type='text' placeholder='Post Title' value={title} onChange={e => setTitle(e.target.value)} />
+                    {submitted && errors.title && <p className='form-errors'style={{color: '#6F52FF'}}>{errors.title}</p>}
                 </div>
-                <div className='post-form-labels'>
-                    <label>Image</label>
-                    <input type='file' accept='image/*' onChange={e => setImage(e.target.files[0])} />
+                <div className='post-form-inputs'>
+                    <label className='post-form-labels'>Image (optional):</label>
+                    <input className='image-button' type='file' accept='image/*' onChange={e => setImage(e.target.files[0])} />
                 </div>
-                <div className='post-form-labels'>
-                    <label>Text</label>
-                    <textarea type='text' value={text} onChange={e => setText(e.target.value)} />
+                <div className='post-form-inputs'>
+                    <label className='post-form-labels'>Text:</label>
+                    <textarea type='text' placeholder='Add caption here...' value={text} onChange={e => setText(e.target.value)} />
+                    {submitted && errors.text && <p className='form-errors' style={{color: '#6F52FF'}}>{errors.text}</p>}
+                </div>
                 </div>
                 <div className='post-submit'>
                     <button className='post-button' type='submit'>Create Post</button>

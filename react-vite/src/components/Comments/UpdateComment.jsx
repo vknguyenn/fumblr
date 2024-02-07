@@ -28,18 +28,19 @@ const UpdateComment = ({comment} ) => {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <div className='modal-container'>
+            <div className='modal-comment'>
                 <h2>Edit a Comment</h2>
-                {errors.comment && <p className="error-text">{errors.comment}</p>}
+                {errors.comment && <p className="error-text" style={{color: '#6F52FF'}}>{errors.comment}</p>}
                 <div className='comment-form-group'>
                     <textarea
+                        className="comment-box"
                         value={commentText}
                         onChange={(e) => setCommentText(e.target.value)}
                         placeholder="Write your comment here..."
                     />
                 </div>
                 <div className='comment-submit'>
-                    <button type='submit'>Edit Comment</button>
+                    <button className='add-comment-submit' type='submit'>Edit Comment</button>
                 </div>
             </div>
         </form>

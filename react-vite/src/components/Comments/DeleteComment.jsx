@@ -16,9 +16,11 @@ const DeleteComment = ({commentId}) => {
     }
     return (
         <div className="delete-post-modal">
-            <p>Do you want to delete this comment?</p>
-            <button onClick={handleDelete}>Yes, delete</button>
-            <button onClick={closeModal}>No</button>
+            <h3>Do you want to delete this comment?</h3>
+            <div className="delete-modal-buttons">
+            <button className="delete-buttons" onClick={handleDelete}>Yes, delete</button>
+            <button className="delete-buttons" onClick={closeModal}>No</button>
+            </div>
         </div>
     )
 }
