@@ -70,3 +70,9 @@ body {
   list-style-type: none;
   cursor: pointer;
 }
+
+#manage-post-link {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}

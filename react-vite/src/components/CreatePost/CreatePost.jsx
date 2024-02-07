@@ -19,16 +19,23 @@ export default function CreatePost() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitted(true)
+
+        if (Object.keys(errors).length > 0) {
+
+            console.error("Cannot submit due to errors:", errors);
+            return;
+        }
         
         if (text.length > 0 && title.length > 0) {
             const formData = new FormData();
             formData.append('post_title', title)
             formData.append('text', text)
-            formData.append('image', image)
+            if (image && typeof image === 'object') {
+                formData.append('image', image);
+            }
            
                setImageLoading(true);
             await dispatch(createPostThunk(formData))
-            // await dispatch(loadPostsThunk())
             closeModal();
         }
     }
@@ -39,10 +46,15 @@ export default function CreatePost() {
         } 
         if (!text.length) {
             newErrors.text = 'Text is required'
-        } 
+        }
+        if (image && typeof image === 'object' && image.name) {
+            if (!image.name.endsWith('.jpeg') && !image.name.endsWith('.jpg') && !image.name.endsWith('.png') && !image.name.endsWith('.gif')) {
+                newErrors.image = 'Image must be in .jpeg, .jpg, .png, or .gif format';
+            }
+        }
             
         setErrors(newErrors)
-    }, [title, text]);
+    }, [title, text, image]);
  
     return (
         <form id='post-modal' encType='multipart/form-data' onSubmit={handleSubmit}>
@@ -57,6 +69,7 @@ export default function CreatePost() {
                 <div className='post-form-inputs'>
                     <label className='post-form-labels'>Image (optional):</label>
                     <input className='image-button' type='file' accept='image/*' onChange={e => setImage(e.target.files[0])} />
+                    {submitted && errors.image && <p className='form-errors'style={{color: '#6F52FF'}}>{errors.image}</p>}
                 </div>
                 <div className='post-form-inputs'>
                     <label className='post-form-labels'>Text:</label>
