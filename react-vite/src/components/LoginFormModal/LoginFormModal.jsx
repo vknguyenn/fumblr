@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import * as sessionActions from '../../redux/session';
 import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -27,33 +30,47 @@ function LoginFormModal() {
       closeModal();
     }
   };
+  const demoUserLogin = async (e) => {
+    e.preventDefault()
+   
+    return await dispatch(sessionActions.thunkLogin({email: 'demo@aa.io', password: 'password'}))
+    .then(navigate('/'))
+    .then(closeModal())
+  }
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+    <div id='login-modal'>
+    <div className="modal-contents">
+      <h1 className="login-title">Log In</h1>
+      <form id='login-inputs' onSubmit={handleSubmit}>
         <label>
           Email
           <input
             type="text"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-          />
+            />
+             <p className='form-errors'>{errors.email || ''}</p>
         </label>
-        {errors.email && <p>{errors.email}</p>}
         <label>
           Password
           <input
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          />
+            />
+             <p className='form-errors'>{errors.password || ''}</p>
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        <button className='login-submit' type="submit">Login</button>
+        <span className='demo-user-login' onClick={demoUserLogin}>Demo User</span>
       </form>
+    </div>
+            </div>
     </>
   );
 }

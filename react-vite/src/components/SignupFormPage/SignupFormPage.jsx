@@ -42,13 +42,16 @@ function SignupFormPage() {
 
   return (
     <>
-      <h1>Sign Up</h1>
+    <div id='signup-modal'>
+      <div className="signup-contents">
+      <h1 className="signup-title">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
         <label>
           Email
           <input
             type="text"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -59,6 +62,7 @@ function SignupFormPage() {
           Username
           <input
             type="text"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -69,6 +73,7 @@ function SignupFormPage() {
           Password
           <input
             type="password"
+            placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -79,6 +84,7 @@ function SignupFormPage() {
           Confirm Password
           <input
             type="password"
+            placeholder="Confirm password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
@@ -87,6 +93,8 @@ function SignupFormPage() {
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit">Sign Up</button>
       </form>
+      </div>
+    </div>
     </>
   );
 }

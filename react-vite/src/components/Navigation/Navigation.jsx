@@ -4,15 +4,19 @@ import "./Navigation.css";
 
 function Navigation() {
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-
-      <li>
+      <>
+      <div id='nav-container'>
+      <div id='fumblr-logo'>
+        <NavLink className='title'to="/">fumblr</NavLink>
+      </div>
+      <div>
         <ProfileButton />
-      </li>
-    </ul>
+      </div>
+
+      </div>
+      </>
+      
+ 
   );
 }
 

@@ -1,0 +1,27 @@
+.delete-post-modal {
+    color: #6F52FF;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 200px;
+    width: 300px;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.delete-modal-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.delete-buttons {
+    padding: 5px 10px;
+    background-color: #6F52FF;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.delete-buttons:hover {
+    box-shadow: 0 0 5px #6F52FF;
+}

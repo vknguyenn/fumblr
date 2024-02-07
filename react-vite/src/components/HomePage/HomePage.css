@@ -1,0 +1,97 @@
+#homepage-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-button button {
+    width: 515px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color:#6F52FF;
+}
+
+.fa-square-plus {
+    margin-right: 5px;
+}
+
+.create-button button:hover {
+    box-shadow: 0 0 5px rgb(42, 8, 82);
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-card {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: #8971ff;
+    margin: 10px 0;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.post-image {
+    width: 500px;
+    border: 1px solid #8971ff
+}
+
+.post-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: #8971ff solid 1px;
+    margin-bottom: 5px;
+}
+.posted-comment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-edit-del button {
+    border:none;
+    color: #8971ff;
+    background-color: white;
+    cursor: pointer;
+}
+.post-edit-del button:hover {
+    color: #6F52FF;
+}
+.comment-icons button {
+    border:none;
+    color: #8971ff;
+    background-color: white;
+    cursor: pointer;
+}
+.comment-icons button:hover {
+    color: #6F52FF;
+}
+
+.add-comment-button button {
+    padding: 5px 10px;
+    background-color: #8971ff;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.add-comment-button button:hover {
+    box-shadow: 0 0 5px #6F52FF;
+}
+
+
