@@ -30,7 +30,7 @@ const UpdateComment = ({comment} ) => {
         <form onSubmit={handleSubmit}>
             <div className='modal-comment'>
                 <h2>Edit a Comment</h2>
-                {errors.comment && <p className="error-text" style={{color: '#6F52FF'}}>{errors.comment}</p>}
+                {errors.comment && <p className="form-errors" style={{color: '#6F52FF'}}>{errors.comment}</p>}
                 <div className='comment-form-group'>
                     <textarea
                         className="comment-box"
