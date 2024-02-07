@@ -10,6 +10,7 @@ import DeletePost from '../PostModals/DeletePost'
 import AddComment from '../Comments/AddComments'
 import UpdateComment from '../Comments/UpdateComment'
 import DeleteComment from '../Comments/DeleteComment'
+import './HomePage.css'
 
 
 
@@ -33,57 +34,83 @@ const HomePage = () => {
 
     return (
         <>
+        <div id='homepage-content'>
         {currentUser && (
         <div className='create-button'>
-            <OpenModalButton buttonText="Create a Post" modalComponent={ <CreatePost /> } />
+            <OpenModalButton buttonText={<div className='create-post'><i className="fa-regular fa-square-plus"></i>Create a Post</div>} modalComponent={ <CreatePost /> } />
         </div>
         )}
         <div>
+        <div className='posts-container'>
+            
          {postObj.map((post) => {
                 const postUser = user[post.user_id]; 
                 const postComments = Object.values(comments).filter(comment => comment.postId === post.id);
                 return (
+                    <div  key={post.id} className='post-card'> 
                     <div key={post.id}>
                         <h3>{postUser?.username}</h3>
                         <h4>{post?.post_title}</h4>
-                        <img src={post?.image_url} />
+                        {post.image_url ? (
+                <img
+                    className='post-image'
+                    src={post.image_url}
+                    alt="Post"
+                    style={{ border: '1px solid #8971ff', width: '500px' }}
+                    />
+                ) : (
+                    <div style={{ width: '500px', height: '0px' }}></div>
+                    )}
+                    <div className='post-buttons'> 
                         <p>{post?.text}</p>
              {currentUser && currentUser.id === postUser?.id && (
-                <>
-                    <OpenModalButton buttonText={"Edit Post"} modalComponent={<UpdatePost post={post} />} />
-                    <OpenModalButton buttonText={"Delete Post"} modalComponent={<DeletePost post={post} />} />
+                 <>
+                 <div className='post-edit-del'>
+                    <OpenModalButton className='post-icons' buttonText={<div className="edit-delete"><i className="fa-regular fa-pen-to-square"></i></div>} modalComponent={<UpdatePost post={post} />} />
+                    <OpenModalButton className='post-icons' buttonText={<div className="edit-delete"><i className="fa-solid fa-trash"></i></div>} modalComponent={<DeletePost post={post} />} />
+                 </div>
                 </>
                 )}
+                </div>
                 <div className="comments-section">
+                {postComments.length > 0 && <h4>Comments:</h4>}
                 {postComments.map(com => (
-                    <div key={com.id}>
+                    <div className="posted-comment" key={com.id}>
                         <p><strong>{com.username}:</strong> {com.comment}</p>
                         {currentUser && currentUser.id === com.userId && (
                             <>
+                            <div className='comment-icons'>
+
                                         <OpenModalButton
-                                            buttonText="Edit Comment"
+                                            buttonText={<div className="edit-delete-div"><i className="fa-regular fa-pen-to-square"></i></div>}
                                             modalComponent={<UpdateComment comment={com} />}
                                             />
                                         <OpenModalButton
-                                            buttonText="Delete Comment"
+                                            buttonText={<div className="edit-delete-div"><i className="fa-solid fa-trash"></i></div>}
                                             modalComponent={<DeleteComment commentId={com.id} />}
                                             />
+                                            </div>
                                             </>
                                     )}                      
                     </div>
                 ))}
+                </div>
                 {currentUser && (
+                    <div className='add-comment-button'>
                         <OpenModalButton
                             buttonText="Add Comment"
                             modalComponent={<AddComment postId={post.id} />}
                         />
+                         </div>
                     )}
             </div>
                 </div>
                     
                 );
             })}
+        </div>
             
+        </div>
         </div>
         
         </>

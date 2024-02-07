@@ -1,0 +1,28 @@
+.modal-comment {
+    color: #8971ff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 200px;
+    width: 250px;
+    justify-content: space-evenly;
+    border-radius: 10px;
+}
+
+.comment-box {
+    width: 180px;
+    height: 50px;
+}
+
+.add-comment-submit {
+    padding: 5px 10px;
+    background-color: #6F52FF;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.add-comment-submit:hover {
+    box-shadow: 0 0 5px #6F52FF;
+}
