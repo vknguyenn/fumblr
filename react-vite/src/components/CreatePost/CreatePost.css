@@ -30,6 +30,13 @@
     flex-direction: column;
 }
 
+.caption-box {
+    max-width: 400px;
+    max-height: 90px;
+    min-width: 400px;
+    min-height: 90px;
+}
+
 .post-button {
     margin-top: 10px;
     padding: 5px 10px;

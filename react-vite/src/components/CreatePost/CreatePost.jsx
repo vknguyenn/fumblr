@@ -47,8 +47,8 @@ export default function CreatePost() {
         if (title.length > 55) {
             newErrors.title = 'Title cannot exceed 55 characters'
         } 
-        if (text.length > 255) {
-            newErrors.text = 'Text cannot exceed 255 characters'
+        if (text.length > 1200) {
+            newErrors.text = 'Text cannot exceed 1200 characters'
         } 
         if (!text.length) {
             newErrors.text = 'Text is required'
@@ -70,17 +70,17 @@ export default function CreatePost() {
                 <div className='post-form-inputs'>
                     <label className='post-form-labels'>Title:</label>
                     <input type='text' placeholder='Post Title' value={title} onChange={e => setTitle(e.target.value)} />
-                    {submitted && errors.title && <p className='form-errors'style={{color: '#6F52FF'}}>{errors.title}</p>}
+                    {submitted && errors.title && <p className='form-errors'style={{color: '#f864ec'}}>{errors.title}</p>}
                 </div>
                 <div className='post-form-inputs'>
                     <label className='post-form-labels'>Image (optional):</label>
                     <input className='image-button' type='file' accept='image/*' onChange={e => setImage(e.target.files[0])} />
-                    {submitted && errors.image && <p className='form-errors'style={{color: '#6F52FF'}}>{errors.image}</p>}
+                    {submitted && errors.image && <p className='form-errors'style={{color: '#f864ec'}}>{errors.image}</p>}
                 </div>
                 <div className='post-form-inputs'>
                     <label className='post-form-labels'>Text:</label>
-                    <textarea type='text' placeholder='Add caption here...' value={text} onChange={e => setText(e.target.value)} />
-                    {submitted && errors.text && <p className='form-errors' style={{color: '#6F52FF'}}>{errors.text}</p>}
+                    <textarea className='caption-box' type='text' placeholder='Add caption here...' value={text} onChange={e => setText(e.target.value)} />
+                    {submitted && errors.text && <p className='form-errors' style={{color: '#f864ec'}}>{errors.text}</p>}
                 </div>
                 </div>
                 <div className='post-submit'>

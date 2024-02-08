@@ -19,14 +19,14 @@ function SignupFormModal() {
     if (String(password).length < 6) {
       return setErrors({
         password:
-          "Password must be at least 6 characters. ",
+          "Password must be at least 6 characters."
       })
     }
 
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:
-          "Passwords do not match",
+          "Passwords do not match"
       });
     }
 

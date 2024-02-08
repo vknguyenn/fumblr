@@ -35,7 +35,7 @@ const AddComment = ({ postId }) => {
         <form onSubmit={handleSubmit}>
             <div className='modal-comment'>
                 <h2>Add a Comment</h2>
-                {errors.comment && <p className="form-errors" style={{color: '#6F52FF'}}>{errors.comment}</p>}
+                {errors.comment && <p className="form-errors" style={{color: '#f864ec'}}>{errors.comment}</p>}
                 <div className='comment-form-group'>
                     <textarea
                         className="comment-box"
