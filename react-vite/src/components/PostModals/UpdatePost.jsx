@@ -50,6 +50,13 @@ const UpdatePost = ({ post }) => {
             newErrors.text = 'Text is required'
         } 
 
+        if (title.length > 55) {
+            newErrors.title = 'Title cannot exceed 55 characters'
+        } 
+        if (text.length > 1200) {
+            newErrors.text = 'Text cannot exceed 1200 characters'
+        } 
+
         if (image && typeof image === 'object' && image.name) {
             if (!image.name.endsWith('.jpeg') && !image.name.endsWith('.jpg') && !image.name.endsWith('.png') && !image.name.endsWith('.gif')) {
                 newErrors.image = 'Image must be in .jpeg, .jpg, .png, or .gif format';
@@ -65,21 +72,23 @@ const UpdatePost = ({ post }) => {
     return (
         <form id='post-modal' encType='multipart/form-data' onSubmit={handleSubmit}>
             <div className='modal-container'>
-                <h2>Update a Post</h2>
+                <h2 className='create-post-title'>Update a Post</h2>
+                <div className="post-inputs">
                 <div className='post-form-inputs'>
                     <label className='post-form-labels'>Title:</label>
                     <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
-                    {submitted && errors.title && <p className='form-errors' style={{color: '#6F52FF'}}>{errors.title}</p>}
+                    {submitted && errors.title && <p className='form-errors' style={{color: '#f864ec'}}>{errors.title}</p>}
                 </div>
                 <div className='post-form-inputs'>
                     <label className='post-form-labels'>Image (optional):</label>
                     <input type='file' accept='image/*' onChange={e => setImage(e.target.files[0])} />
-                    {submitted && errors.image && <p className='form-errors'style={{color: '#6F52FF'}}>{errors.image}</p>}
+                    {submitted && errors.image && <p className='form-errors'style={{color: '#f864ec'}}>{errors.image}</p>}
                 </div>
                 <div className='post-form-inputs'>
                     <label className='post-form-labels'>Text: </label>
-                    <textarea type='text' value={text} onChange={e => setText(e.target.value)} />
-                    {submitted && errors.text && <p className='form-errors' style={{color: '#6F52FF'}}>{errors.text}</p>}
+                    <textarea className='caption-box' type='text' value={text} onChange={e => setText(e.target.value)} />
+                    {submitted && errors.text && <p className='form-errors' style={{color: '#f864ec'}}>{errors.text}</p>}
+                </div>
                 </div>
                 <div className='post-submit'>
                     <button className='post-button' type='submit'>Update Post</button>

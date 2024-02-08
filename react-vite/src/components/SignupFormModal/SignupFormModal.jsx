@@ -19,15 +19,21 @@ function SignupFormModal() {
     if (String(password).length < 6) {
       return setErrors({
         password:
-          "Password must be at least 6 characters. ",
+          "Password must be at least 6 characters."
       })
     }
 
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:
-          "Passwords do not match",
+          "Passwords do not match"
       });
+    }
+
+    if (username.length > 40) {
+      return setErrors({
+        username: "Username must be under 40 characters"
+      })
     }
 
     const serverResponse = await dispatch(
@@ -50,13 +56,6 @@ function SignupFormModal() {
     <div id='signup-modal'>
     <div className="signup-contents">
       <h1 className="signup-title">Sign Up</h1>
-      {/* <div className="error-container">
-          {errors.server && <p className='form-errors' style={{color: '#6F52FF'}}>{errors.server}</p>}
-          {errors.email && <p className='form-errors' style={{color: '#6F52FF'}}>{errors.email}</p>}
-          {errors.username && <p className='form-errors' style={{color: '#6F52FF'}}>{errors.username}</p>}
-          {errors.password && <p className='form-errors' style={{color: '#6F52FF'}}>{errors.password}</p>}
-          {errors.confirmPassword && <p className='form-errors'style={{color: '#6F52FF'}}>{errors.confirmPassword}</p>}
-      </div> */}
       <form className='signup-inputs' onSubmit={handleSubmit}>
         <label className="signup-labels">
           Email

@@ -62,7 +62,7 @@ const HomePage = () => {
                     <div style={{ width: '500px', height: '0px' }}></div>
                     )}
                     <div className='post-buttons'> 
-                        <p>{post?.text}</p>
+                        <p className='post-caption'>{post?.text}</p>
              {currentUser && currentUser.id === postUser?.id && (
                  <>
                  <div className='post-edit-del'>
@@ -76,7 +76,7 @@ const HomePage = () => {
                 {postComments.length > 0 && <h4>Comments:</h4>}
                 {postComments.map(com => (
                     <div className="posted-comment" key={com.id}>
-                        <p><strong>{com.username}:</strong> {com.comment}</p>
+                        <p className='added-comment'><strong>{com.username}:</strong> {com.comment}</p>
                         {currentUser && currentUser.id === com.userId && (
                             <>
                             <div className='comment-icons'>
