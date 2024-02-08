@@ -22,6 +22,12 @@ const UpdateComment = ({comment} ) => {
             return;
         }
 
+        if (commentText.length > 255) {
+            newErrors.comment = 'Comment must be under 255 characters'
+            setErrors(newErrors);
+            return;
+        }
+
         await dispatch(updateCommentThunk({ comment: commentText }, comment.id));
         await dispatch(loadCommentsThunk())
         closeModal();
@@ -30,7 +36,7 @@ const UpdateComment = ({comment} ) => {
         <form onSubmit={handleSubmit}>
             <div className='modal-comment'>
                 <h2>Edit a Comment</h2>
-                {errors.comment && <p className="form-errors" style={{color: '#6F52FF'}}>{errors.comment}</p>}
+                {errors.comment && <p className="form-errors" style={{color: '#f864ec'}}>{errors.comment}</p>}
                 <div className='comment-form-group'>
                     <textarea
                         className="comment-box"
