@@ -10,8 +10,8 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    post_title = db.Column(db.String(255))
-    text = db.Column(db.String(255))
+    post_title = db.Column(db.String(55))
+    text = db.Column(db.String(1200))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     image_url = db.Column(db.String)
