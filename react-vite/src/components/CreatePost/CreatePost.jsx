@@ -47,8 +47,8 @@ export default function CreatePost() {
         if (title.length > 55) {
             newErrors.title = 'Title cannot exceed 55 characters'
         } 
-        if (text.length > 1200) {
-            newErrors.text = 'Text cannot exceed 1200 characters'
+        if (text.length > 1000) {
+            newErrors.text = 'Text cannot exceed 1000 characters'
         } 
         if (!text.length) {
             newErrors.text = 'Text is required'
