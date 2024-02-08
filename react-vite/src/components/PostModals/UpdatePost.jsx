@@ -50,6 +50,13 @@ const UpdatePost = ({ post }) => {
             newErrors.text = 'Text is required'
         } 
 
+        if (title.length > 55) {
+            newErrors.title = 'Title cannot exceed 55 characters'
+        } 
+        if (text.length > 255) {
+            newErrors.text = 'Text cannot exceed 255 characters'
+        } 
+
         if (image && typeof image === 'object' && image.name) {
             if (!image.name.endsWith('.jpeg') && !image.name.endsWith('.jpg') && !image.name.endsWith('.png') && !image.name.endsWith('.gif')) {
                 newErrors.image = 'Image must be in .jpeg, .jpg, .png, or .gif format';

@@ -22,6 +22,12 @@ const UpdateComment = ({comment} ) => {
             return;
         }
 
+        if (commentText.length > 255) {
+            newErrors.comment = 'Comment must be under 255 characters'
+            setErrors(newErrors);
+            return;
+        }
+
         await dispatch(updateCommentThunk({ comment: commentText }, comment.id));
         await dispatch(loadCommentsThunk())
         closeModal();

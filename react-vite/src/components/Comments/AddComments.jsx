@@ -20,6 +20,12 @@ const AddComment = ({ postId }) => {
             return;
         }
 
+        if (comment.length > 255) {
+            newErrors.comment = 'Comment must be under 255 characters'
+            setErrors(newErrors);
+            return;
+        }
+
         await dispatch(createCommentThunk({comment}, postId));
         await dispatch(loadCommentsThunk())
         closeModal();

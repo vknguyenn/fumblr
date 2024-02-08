@@ -40,10 +40,13 @@
     margin: 10px 0;
     border-radius: 10px;
     padding: 10px;
+    /* overflow: hidden; */
 }
 
 .post-image {
-    width: 500px;
+    /* width: 500px; */
+    max-width: 100%;
+    height: auto;
     border: 1px solid #8971ff
 }
 
@@ -60,6 +63,27 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    white-space: normal; 
+    max-width: 90%;
+    flex-shrink: 0; 
+    /* overflow: hidden;  */
+}
+
+
+.added-comment {
+    flex-grow: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 400px;
+    flex-shrink: 0;
+}
+
+.post-caption  {
+    flex-grow: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 400px;
+    flex-shrink: 0;
 }
 
 .post-edit-del button {
@@ -76,6 +100,8 @@
     color: #8971ff;
     background-color: white;
     cursor: pointer;
+    flex-shrink: 0;
+    
 }
 .comment-icons button:hover {
     color: #6F52FF;
