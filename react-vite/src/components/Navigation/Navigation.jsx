@@ -14,6 +14,9 @@ function Navigation() {
       </div>
 
       </div>
+      <div>
+      <NavLink to="https://github.com/vknguyenn/fumblr" target="_blank" className='fa-brands fa-github'></NavLink>
+      </div>
       </>
       
  
