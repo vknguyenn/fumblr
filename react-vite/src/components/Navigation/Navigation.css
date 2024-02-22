@@ -71,7 +71,7 @@ body {
   cursor: pointer;
 }
 
-#manage-post-link {
+#manage-post-link, #liked-post-link {
   text-decoration: none;
   color: white;
   cursor: pointer;
