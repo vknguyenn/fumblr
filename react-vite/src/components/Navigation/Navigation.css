@@ -76,3 +76,10 @@ body {
   color: white;
   cursor: pointer;
 }
+
+.fa-github {
+  color: white;
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+}
