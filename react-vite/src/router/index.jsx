@@ -4,6 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import HomePage from '../components/HomePage/HomePage';
 import ManagePosts from '../components/ManagePosts/ManagePosts';
 import Layout from './Layout';
+import LikedPosts from '../components/LikedPosts/LikedPosts';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "manage",
         element: <ManagePosts />
+      },
+      {
+        path: "likes",
+        element: <LikedPosts />
       },
     ],
   },

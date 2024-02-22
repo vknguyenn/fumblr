@@ -62,7 +62,7 @@ body {
 }
 
 .button-divider {
-  border-top: 1px solid #3E3D3D;
+  border-top: 1px solid #ffffff;
   padding: 8px 70px 8px 20px;
 }
 
@@ -71,7 +71,7 @@ body {
   cursor: pointer;
 }
 
-#manage-post-link {
+#manage-post-link, #liked-post-link {
   text-decoration: none;
   color: white;
   cursor: pointer;

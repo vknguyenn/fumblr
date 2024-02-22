@@ -10,7 +10,6 @@ import OpenModalButton from  "../OpenModalButton/OpenModalButton"
 const ManagePosts = () => {
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.post)
-    // const postObj = Object.values(posts).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     const user = useSelector(state => state.user);
     const currentUser = useSelector(state => state.session.user);
     const postObj = Object.values(posts)
@@ -22,18 +21,22 @@ const ManagePosts = () => {
         dispatch(loadUsersThunk());
     }, [dispatch])
 
-    if (!posts || postObj.length === 0) {
-        return <div>No posts yet</div>;
-    }
+    // if (!posts || postObj.length === 0) {
+    //     return <div>No posts yet</div>;
+    // }
 
     return (
         <>
         <div id='homepage-content'>
+        <h1>Manage Posts</h1>
         {currentUser && (
         <div className='create-button'>
             <OpenModalButton buttonText={<div className='create-post'><i className="fa-regular fa-square-plus"></i>Create a Post</div>} modalComponent={ <CreatePost /> } />
         </div>
         )}
+        {currentUser && postObj.length === 0 && (
+                    <div>You do not have a post yet, click the button above to create your first post!</div>
+                )}
         <div>
         <div className='posts-container'>
          {postObj.map((post) => {

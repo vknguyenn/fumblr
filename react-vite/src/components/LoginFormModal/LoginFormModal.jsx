@@ -66,7 +66,7 @@ function LoginFormModal() {
             />
              <p className='form-errors'>{errors.password || ''}</p>
         </label>
-        <button className='login-submit' type="submit">Login</button>
+        <button className='login-submit' type="submit" disabled={!email.length || !password.length}>Login</button>
         <span className='demo-user-login' onClick={demoUserLogin}>Demo User</span>
       </form>
     </div>

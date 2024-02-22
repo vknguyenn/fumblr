@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { loadPostsThunk } from '../../redux/post'
 import { loadUsersThunk } from '../../redux/user'
 import { loadCommentsThunk } from '../../redux/comment'
+import { loadLikesThunk } from '../../redux/like'
 import OpenModalButton from  "../OpenModalButton/OpenModalButton"
 import CreatePost from '../CreatePost/CreatePost'
 import UpdatePost from '../PostModals/UpdatePost'
@@ -10,6 +11,7 @@ import DeletePost from '../PostModals/DeletePost'
 import AddComment from '../Comments/AddComments'
 import UpdateComment from '../Comments/UpdateComment'
 import DeleteComment from '../Comments/DeleteComment'
+import Like from '../Likes/Likes'
 import './HomePage.css'
 
 
@@ -26,6 +28,7 @@ const HomePage = () => {
         dispatch(loadPostsThunk());
         dispatch(loadUsersThunk());
         dispatch(loadCommentsThunk());
+        dispatch(loadLikesThunk())
     }, [dispatch])
 
     if (!posts || postObj.length === 0) {
@@ -96,12 +99,15 @@ const HomePage = () => {
                 ))}
                 </div>
                 {currentUser && (
+                    <>
                     <div className='add-comment-button'>
                         <OpenModalButton
                             buttonText="Add Comment"
                             modalComponent={<AddComment postId={post.id} />}
-                        />
+                            />
+                        <Like postId={post?.id} userId={postUser?.id} />
                          </div>
+                        </>
                     )}
             </div>
                 </div>
