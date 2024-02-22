@@ -8,7 +8,8 @@ const UpdatePost = ({ post }) => {
     const dispatch = useDispatch()
     const [title, setTitle] = useState(post.post_title)
     const [text, setText] = useState(post.text)
-    const [image, setImage] = useState(post?.image_url)
+    const [image, setImage] = useState(null)
+    const [displayImage, setDisplayImage] = useState(post?.image_url)
     const [imageLoading, setImageLoading] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [errors, setErrors] = useState({})
@@ -66,7 +67,17 @@ const UpdatePost = ({ post }) => {
         setErrors(newErrors)
     }, [title, text, image]);
 
+    const fileWrap = (e) => {
+        e.stopPropagation();
     
+        const tempFile = e.target.files[0];
+    
+        const newImageURL = URL.createObjectURL(tempFile); // Generate a local URL to render the image file inside of the <img> tag.
+        setImage(tempFile);
+        setDisplayImage(newImageURL);
+        // setFilename(tempFile.name);
+        // setOptional("");
+      }
 
 
     return (
@@ -81,7 +92,11 @@ const UpdatePost = ({ post }) => {
                 </div>
                 <div className='post-form-inputs'>
                     <label className='post-form-labels'>Image (optional):</label>
-                    <input type='file' accept='image/*' onChange={e => setImage(e.target.files[0])} />
+                    <label htmlFor="update-image">
+                    <img className='thumbnail'src={displayImage}></img>
+                    <input id='update-image' type='file' accept='image/*' onChange={fileWrap} />
+                    <p className="update-text">Click above to update/add an image!</p>
+                    </label>
                     {submitted && errors.image && <p className='form-errors'style={{color: '#f864ec'}}>{errors.image}</p>}
                 </div>
                 <div className='post-form-inputs'>
