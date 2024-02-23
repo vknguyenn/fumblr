@@ -34,7 +34,7 @@ https://fumblr-y3x9.onrender.com/
 - To create a post, the user fill out the title and text inputs
 - Images are optional, however if a user wants to post an image,  must be in .jpeg, .jpg, .png, or .gif format
 - Valid posts will automatically render on the landing page when submitted
-- To only view the users' post, they can click on the profile button and click "Manange Posts"
+- To only view the users' post, they can click on the profile button and click "Manage Posts"
 - Users are also able to update and delete their own posts
 
 ![alt text](fumblr-post-modal.PNG)
@@ -50,6 +50,9 @@ https://fumblr-y3x9.onrender.com/
 - To view their liked posts, they can click on the profile button and click on "Your Likes"
 
 ![alt text](fumblr-dropdown.PNG)
+
+### Future Features
+- Follows
 
 ## Index
 
