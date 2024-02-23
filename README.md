@@ -1,8 +1,67 @@
 # Fumblr
 
-This is the starter for the Flask React project.
+Fumblr is an engaging online platform that draws inspiration from the popular social media app, Tumblr. Within this website, logged in users are allowed to craft their own unique posts, engage in vibrant discussions through comments, and express appreciation by liking content they enjoy!
 
-## Getting started
+## Live Link
+
+https://fumblr-y3x9.onrender.com/
+
+## Technologies Used: 
+
+<div align="center">
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React"/>
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/187896150-cc1dcb12-d490-445c-8e4d-1275cd2388d6.png" alt="Redux" title="Redux"/>
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" alt="JavaScript" title="JavaScript">
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/183423507-c056a6f9-1ba8-4312-a350-19bcbc5a8697.png" alt="Python" title="Python"/>
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/183423775-2276e25d-d43d-4e58-890b-edbc88e915f7.png" alt="Flask" title="Flask"/>
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png" alt="Git" title="Git"/>
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" alt="HTML" title="HTML"/>
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" alt="CSS" title="CSS"/>
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/117208740-bfb78400-adf5-11eb-97bb-09072b6bedfc.png" alt="PostgreSQL" title="PostgreSQL">
+	<img width="50" src="https://user-images.githubusercontent.com/25181517/183896132-54262f2e-6d98-41e3-8888-e40ab5a17326.png" alt="AWS" title="AWS"/>
+</div>
+
+## Navigate the Site
+
+### Landing Page
+- In this site, users are able to view all posts and comments
+- When logged in, users are able to create posts that text and images
+- Logged in users are also able to add comments and like any post
+
+![alt text](fumblr-thumbnail.png)
+
+### Make a Post
+- To create a post, the user fill out the title and text inputs
+- Images are optional, however if a user wants to post an image,  must be in .jpeg, .jpg, .png, or .gif format
+- Valid posts will automatically render on the landing page when submitted
+- To only view the users' post, they can click on the profile button and click "Manange Posts"
+- Users are also able to update and delete their own posts
+
+![alt text](fumblr-post-modal.PNG)
+
+### Add a Comment
+- To add a comment, to any post by clicking on the "Add Comment" button
+- Users are able to edit and delete their own comments by clicking on the icons next to the comment
+
+![alt text](fumblr-comment-section.PNG)
+
+### Like a Post
+- Users can like and unlike posts by clicking on the heart icon
+- To view their liked posts, they can click on the profile button and click on "Your Likes"
+
+![alt text](fumblr-dropdown.PNG)
+
+## Index
+
+- [Database Schema](https://github.com/vknguyenn/fumblr/wiki/Database-Schema#database-schema)
+
+- [MVP Feature list](https://github.com/vknguyenn/fumblr/wiki/MVP-Feature-List)
+
+- [User Stories](https://github.com/vknguyenn/fumblr/wiki/User-Stories)
+
+- [Wireframes](https://github.com/vknguyenn/fumblr/wiki/Wireframes)
+
+## Run the site locally
 
 1. Clone this repository (only this branch).
 
