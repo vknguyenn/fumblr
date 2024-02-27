@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as postActions from '../../redux/post';
 import * as likeActions from '../../redux/like';
@@ -10,19 +10,17 @@ import DeletePost from '../PostModals/DeletePost';
 import AddComment from '../Comments/AddComments'
 import UpdateComment from '../Comments/UpdateComment'
 import DeleteComment from '../Comments/DeleteComment'
-import Like from '../Likes/Likes';
 
 const LikedPosts = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
     const currentUser = useSelector(state => state.session.user);
     const likes = useSelector(state => state.like.likes ?? []);
-    const likedPostsIds = likes.filter(like => like.userId === currentUser?.id).map(like => like.postId);
     const comments = useSelector(state => state.comment.comment || [])
-
-    
     const posts = useSelector((state) => state.post)
-    const postObj = Object.values(posts).filter(post => likedPostsIds.includes(post.id))
+
+    const [likedPosts, setLikedPosts] = useState([]);
+    
 
     useEffect(() => {
         dispatch(loadUsersThunk());
@@ -31,7 +29,21 @@ const LikedPosts = () => {
         dispatch(loadCommentsThunk())
     }, [dispatch]);
     
-    if (!postObj.length) return <p>You have not liked a post yet!</p>
+    useEffect(() => {
+        const likedPostsIds = likes.filter(like => like.userId === currentUser?.id).map(like => like.postId);
+        const updatedLikedPosts = Object.values(posts).filter(post => likedPostsIds.includes(post.id));
+        setLikedPosts(updatedLikedPosts);
+    }, [likes, posts, currentUser?.id]);
+
+    const unlikePost = async (postId) => {
+        const likeId = likes.find(like => like.postId === postId && like.userId === currentUser.id)?.id;
+        if (likeId) {
+            await dispatch(likeActions.removeLikeThunk(likeId));
+            setLikedPosts(prevLikedPosts => prevLikedPosts.filter(post => post.id !== postId));
+        }
+    };
+
+    if (!likedPosts.length) return <p>You have not liked a post yet!</p>
 
     return (
         <>
@@ -40,7 +52,7 @@ const LikedPosts = () => {
         {currentUser && (
             <div className="posts">
             <div className='posts-container'>
-            {postObj.map((post) => {
+            {likedPosts.map((post) => {
                 const postUser = user[post.user_id]; 
                 const postComments = Object.values(comments).filter(comment => comment.postId === post.id);
                 return (
@@ -99,7 +111,7 @@ const LikedPosts = () => {
                                buttonText="Add Comment"
                                modalComponent={<AddComment postId={post.id} />}
                                />
-                            <Like postId={post?.id} userId={postUser?.id} />
+                            <i onClick={() => unlikePost(post.id)} className="fa-solid fa-heart"></i>
                             </div>
                                </>
                        )}
