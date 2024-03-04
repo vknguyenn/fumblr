@@ -4,6 +4,7 @@ import { loadPostsThunk } from '../../redux/post'
 import { loadUsersThunk } from '../../redux/user'
 import { loadCommentsThunk } from '../../redux/comment'
 import { loadLikesThunk } from '../../redux/like'
+import { NavLink } from 'react-router-dom'
 import OpenModalButton from  "../OpenModalButton/OpenModalButton"
 import CreatePost from '../CreatePost/CreatePost'
 import UpdatePost from '../PostModals/UpdatePost'
@@ -117,6 +118,10 @@ const HomePage = () => {
         </div>
             
         </div>
+        <footer id="footer">
+            <NavLink to="https://github.com/vknguyenn/fumblr" target="_blank" className='fa-brands fa-github'></NavLink>
+            <NavLink to="https://www.linkedin.com/in/victoria-nguyen-945771239/" target="_blank" className='fa-brands fa-linkedin'></NavLink>
+      </footer>
         </div>
         
         </>
