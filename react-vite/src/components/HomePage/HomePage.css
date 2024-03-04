@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 90px;
 }
 
 .create-button button {
@@ -126,4 +127,22 @@
     align-items: center;
 }
 
+#footer {
+    border-top: 1px solid white;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 98%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .fa-github {
+    color: white;
+    
+  }
+  .fa-linkedin {
+    color: white;
 
+  }

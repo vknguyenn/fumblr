@@ -23,8 +23,14 @@ body {
 #nav-container {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
+  padding: 15px;
   align-items: center;
+  border-bottom: 1px solid white;
+  background-color: #8971ff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .title {
@@ -75,11 +81,4 @@ body {
   text-decoration: none;
   color: white;
   cursor: pointer;
-}
-
-.fa-github {
-  color: white;
-  position: fixed;
-  bottom: 5px;
-  left: 5px;
 }

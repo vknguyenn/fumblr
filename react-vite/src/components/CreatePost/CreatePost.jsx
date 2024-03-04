@@ -14,7 +14,6 @@ export default function CreatePost() {
 
     const [image, setImage] = useState(null)
     const [imageLoading, setImageLoading] = useState(false)
-    // console.log(errors, submitted)
     
     const handleSubmit = async (e) => {
         e.preventDefault();

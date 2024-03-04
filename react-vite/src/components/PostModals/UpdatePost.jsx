@@ -14,7 +14,7 @@ const UpdatePost = ({ post }) => {
     const [submitted, setSubmitted] = useState(false)
     const [errors, setErrors] = useState({})
     const { closeModal } = useModal()
-    console.log(errors, submitted)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -75,8 +75,6 @@ const UpdatePost = ({ post }) => {
         const newImageURL = URL.createObjectURL(tempFile); // Generate a local URL to render the image file inside of the <img> tag.
         setImage(tempFile);
         setDisplayImage(newImageURL);
-        // setFilename(tempFile.name);
-        // setOptional("");
       }
 
 
