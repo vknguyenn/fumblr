@@ -43,12 +43,14 @@ const LikedPosts = () => {
         }
     };
 
-    if (!likedPosts.length) return <p>You have not liked a post yet!</p>
 
     return (
         <>
         <div id='homepage-content'>
         <h1>Your Likes</h1>
+        {likedPosts.length === 0 && (
+                    <p>You have not liked a post yet!</p>
+                )}
         {currentUser && (
             <div className="posts">
             <div className='posts-container'>

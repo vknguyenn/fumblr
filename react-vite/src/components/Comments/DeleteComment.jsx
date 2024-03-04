@@ -8,7 +8,7 @@ const DeleteComment = ({commentId}) => {
 
     const handleDelete = async(e) => {
         e.preventDefault()
-        console.log("COMMENT ID: ", commentId)
+
         await dispatch(deleteCommentThunk(commentId))
         await dispatch(loadCommentsThunk())
         closeModal()

@@ -10,7 +10,7 @@ const UpdateComment = ({comment} ) => {
     const [errors, setErrors] = useState({})
     const [submitted, setSubmitted] = useState(false)
     const { closeModal } = useModal()
-    console.log(submitted)
+
     const handleSubmit = async(e) => {
         e.preventDefault()
         setSubmitted(true)
@@ -36,7 +36,7 @@ const UpdateComment = ({comment} ) => {
         <form onSubmit={handleSubmit}>
             <div className='modal-comment'>
                 <h2>Edit a Comment</h2>
-                {errors.comment && <p className="form-errors" style={{color: '#f864ec'}}>{errors.comment}</p>}
+                {submitted && errors.comment && <p className="form-errors" style={{color: '#f864ec'}}>{errors.comment}</p>}
                 <div className='comment-form-group'>
                     <textarea
                         className="comment-box"
